@@ -10,14 +10,16 @@ font = pygame.font.Font(None, 100)
 bg_surface = pygame.image.load('background.jpg').convert_alpha()
 fitted_image = pygame.transform.scale(bg_surface, (600, 400))
 
-
 bird_surface = pygame.image.load('bird.png').convert_alpha()
 bird_size = pygame.transform.scale(bird_surface, (60, 50))
 bird_size_y = 200
+
+# bird_size_rect = 
+
 gravity = 0
 
-start = False
 
+start = False
 
 rect_one_x = 300
 rect_two_x = rect_one_x + 200
@@ -37,11 +39,18 @@ while True:
                 
 
     screen.blit(fitted_image, (0, 0))
-    screen.blit(bird_size, (100, bird_size_y))
+    screen.blit(bird_size, bird_size.get_rect(topleft = (100, bird_size_y)))
 
     pygame.draw.rect(screen, (213, 45, 45), (rect_one_x, 300, 40, 100))
     pygame.draw.rect(screen, (213, 45, 45), (rect_two_x, 200, 40, 200))
     pygame.draw.rect(screen, (213, 45, 45), (rect_three_x, 250, 40, 150))
+
+    if bird_size.get_rect(topleft = (100, bird_size_y)).colliderect(pygame.draw.rect(screen, (213, 45, 45), (rect_one_x, 300, 40, 100))):
+        start = False
+    elif bird_size.get_rect(topleft = (100, bird_size_y)).colliderect(pygame.draw.rect(screen, (213, 45, 45), (rect_two_x, 200, 40, 200))):
+        start = False
+    elif bird_size.get_rect(topleft = (100, bird_size_y)).colliderect(pygame.draw.rect(screen, (213, 45, 45), (rect_three_x, 250, 40, 150))):
+        start = False
 
 
     if rect_one_x < -40:
